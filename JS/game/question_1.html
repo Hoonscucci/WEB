@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <title>숫자 맞히기</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="question_1.css" />
+  </head>
+  <body>
+    <div id="wrapper">
+      <h1>숫자 맞히기 게임</h1>
+      <p>1에서 100 사이의 수를 입력하세요.</p>
+      <form action="">
+        <label><input type="text" id="try" autofocus /></label>
+        <input type="button" value="확인" id="check" class="btn btn-1" />
+        <input type="reset" value="다시" id="reset" class="btn btn-2" />
+      </form>
+      <br />
+      <div id="number" class="info"></div>
+      <div id="display" class="output"></div>
+      <div id="counter" class="footer"></div>
+    </div>
+    <script>
+      var answer = Math.floor(Math.random() * 100) + 1; // 정답 생성
+      var cnt = 0;
+      var checkBtn = document.getElementById("check");
+      var reseetBtn = document.getElementById("reset");
+      var numDisp = document.getElementById("number");
+      var disp = document.getElementById("display");
+      var count = document.getElementById("counter");
+
+      checkBtn.onclick = function () {
+        var num = parseInt(document.getElementById("try").value);
+
+        if (isNaN(num) || num < 1 || num > 100) {
+          alert("1에서 100사이의 숫자를 입력하세요");
+        } else {
+          if (num == answer) {
+            numDisp.innerText = `방금 입력한 숫자는 ${num}입니다.`;
+            disp.innerText = "정답입니다.";
+            cnt++;
+            count.innerText = `시도 횟수 ${cnt}회`;
+			checkBtn.disabled = true;
+          } else {
+            if (num < answer) {
+              numDisp.innerText = `방금 입력한 숫자는 ${num}입니다.`;
+              disp.innerText = "UP!!";
+              cnt++;
+              count.innerText = `시도 횟수 ${cnt}회`;
+            } else {
+              numDisp.innerText = `방금 입력한 숫자는 ${num}입니다.`;
+              disp.innerText = "DOWN!!";
+              cnt++;
+              count.innerText = `시도 횟수 ${cnt}회`;
+            }
+          }
+        }
+        document.getElementById("try").value = "";
+      };
+      reseetBtn.onclick = function () {
+		answer = Math.floor(Math.random() * 100) + 1; 
+  		cnt = 0; 
+  		numDisp.innerText = "";
+  		disp.innerText = ""; 
+  		count.innerText = "";
+  		document.getElementById("try").value = ""; 
+		  checkBtn.disabled = false;
+      };
+    </script>
+  </body>
+</html>
+
+<!-- window.location.reload(); - 새로고침되게 -->
+
+<!-- 
+1. 정답 설정
+랜덤 생성으로 만들고
+
+2. 입력받는 수
+input에서 끌고 올 수 있지 않을까?
+2-1. 카운트 생성 
+
+3. 확인버튼
+3-1. 눌렀을때 맞았으면 정답입니다. 방금입력한 숫자 표시
+3-2. 카운트 증가, up and down 표시 방금입력한 숫자 표시
+
+4. 다시버튼
+입력창 빈칸으로
+
+var num = document.getElementById("try") // 입력받는 수 
+var cnt = 0
+var disp = document.getElementsByClassName("output")
+var checkBtn = document.querySelector("#check")
+checkBtn.onclick = function() {
+	if (answer == num) {
+		alert("정답입니다.")
+	}
+	console.log(answer)
+	console.log(num)
+	console.log(cnt)
+	console.log(disp) -->
+
+}
